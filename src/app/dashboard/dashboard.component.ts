@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WidgetData, WidgetType } from '../models/widget-data.model';
+import { MapAdapterService } from '../services/map-adapter.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,6 +8,7 @@ import { WidgetData, WidgetType } from '../models/widget-data.model';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit{
+  constructor(private mapAdapterService: MapAdapterService) {}
   widgetData: WidgetData = new WidgetData(0, '', WidgetType.user);
   ngOnInit(): void {
     this.widgetData = {
@@ -14,6 +16,7 @@ export class DashboardComponent implements OnInit{
       count: 24,
       type: WidgetType.user
     };
+    this.mapAdapterService.calculateDataDelta();
   }
 
 }
